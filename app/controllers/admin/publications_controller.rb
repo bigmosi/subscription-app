@@ -1,5 +1,5 @@
-class Admin::PublicationsController < AdminController
-    before_filter :find_publication, only: [:show, :edit, :update, :destroy]
+class Admin::PublicationsController < ApplicationController
+    before_action :find_publication, only: [:show, :edit, :update, :destroy]
   
     def index
       @publications = Publication.all
@@ -21,11 +21,12 @@ class Admin::PublicationsController < AdminController
       end
     end
   
-    def edit; end
+    def edit
+    end
   
     def update
       if @publication.update(publication_params)
-        redirect_to admin_publication_path(@publication)
+        redirect_to admin_publication_path
       else
         render :edit, alert: "Something went wrong."
       end
